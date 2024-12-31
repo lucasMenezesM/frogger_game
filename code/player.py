@@ -35,8 +35,6 @@ class Player(pygame.sprite.Sprite):
           
           self.animations_dict[key].append(surf)
     
-    print(self.animations_dict)
-    
 
   def animate(self, dt):
     current_animation = self.animations_dict[self.walk_status]
