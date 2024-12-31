@@ -3,6 +3,7 @@ import sys
 from settings import *
 from player import Player
 from car import Car
+from random import choice
 
 class AllSprites(pygame.sprite.Group):
   def __init__(self):
@@ -35,11 +36,25 @@ all_groups = AllSprites()
 # player
 player = Player(pos=(WINDOW_WIDTH/2,WINDOW_HEIGHT/2), groups=all_groups)
 
+# custom events
+spawn_car = pygame.event.custom_type()
+pygame.time.set_timer(spawn_car, 50)
+
+pos_list = []
+
 while True:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       pygame.quit()
       sys.exit()
+
+    if event.type == spawn_car:
+      random_pos = choice(CAR_START_POSITIONS)
+      if random_pos not in pos_list:
+        Car(pos=random_pos, groups=all_groups)
+      pos_list.append(random_pos)
+      if len(pos_list) > 5:
+        del pos_list[0]
 
   dt = clock.tick(120) / 1000
 

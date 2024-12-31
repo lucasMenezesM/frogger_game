@@ -22,7 +22,7 @@ class Car(pygame.sprite.Sprite):
       self.direction = pygame.math.Vector2((-1,0))
       self.image = pygame.transform.flip(self.image, True, False)
 
-    self.speed = 350
+    self.speed = 500
   
   
   def import_assets(self):
